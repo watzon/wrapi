@@ -1,0 +1,19 @@
+name: wrapi
+version: 0.1.0
+
+authors:
+  - Chris Watson <chris@watzon.me>
+
+crystal: 0.28.0
+
+license: MIT
+
+dependencies:
+  halite:
+    github: icyleaf/halite
+    branch: master
+  hi8:
+    github: vonkingsley/hi8.cr
+  webmock:
+    github: manastech/webmock.cr
+    branch: master
