@@ -195,6 +195,9 @@ module Wrapi
   # end
   # ```
   module Config
+    # :nodoc:
+    alias Assertion = Proc(Bool)
+
     class_property logger : Wrapi::Logger = Wrapi::Logger.new
 
     class_property? user_agent : String?
@@ -237,16 +240,10 @@ module Wrapi
 
     class_getter? after_deserialize_hook : Proc(Wrapi::Entity, Nil)?
 
-    def self.configure(&block)
-      yield self
-    end
+    class_property assertions : Hash(String, Assertion) = {} of String => Assertion
 
-    macro define_custom(value, default = nil)
-
-    end
-
-    macro define_assertion(name, message = nil, fatal = true)
-
+    def self.define_assertion(name, &block : -> Bool)
+      @@assertions[name.to_s] = block
     end
   end
 end
